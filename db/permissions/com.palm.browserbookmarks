@@ -1,7 +1,7 @@
 [	
 	{	"type"		: "db.kind"
 	,	"object"	: "com.palm.browserbookmarks:1"
-	,	"caller"	: "com.palm.app.isisbrowser"
+	,	"caller"	: "com.palm.app.browser"
 	,	"operations":
 		{	"create": "allow"
 		,	"read"	: "allow"
@@ -19,6 +19,16 @@
 	{	"type"		: "db.kind"
 	,	"object"	: "com.palm.browserbookmarks:1"
 	,	"caller"	: "com.palm.service.customization"
+	,	"operations":
+		{	"create": "allow"
+		,	"read"	: "allow"
+		,	"update": "allow"
+		,	"delete": "allow"
+		}
+	},
+	{	"type"		: "db.kind"
+	,	"object"	: "com.palm.browserbookmarks:1"
+	,	"caller"	: "com.palm.app.isisbrowser"
 	,	"operations":
 		{	"create": "allow"
 		,	"read"	: "allow"

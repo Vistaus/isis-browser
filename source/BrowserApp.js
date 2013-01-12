@@ -54,6 +54,7 @@ enyo.kind({
 				onAddBookmark: "addBookmark",
 				onAddToLauncher: "showAddtoLauncherDialog",
 				onShareLink: "shareClick",
+				onDownloadLink: "downloadClick",
 				onOpenBookmarks: "bookmarksClick",
 				onPrint: "printClick",
 				onUrlRedirected: "openResource",

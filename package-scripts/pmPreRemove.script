@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Make root read/write
+mount -o remount,rw /
+
+# Remove new perms
+rm /etc/palm/db/permissions/com.palm.browserbookmarks
+rm /etc/palm/db/permissions/com.palm.browserhistory
+rm /etc/palm/db/permissions/com.palm.browserpreferences
+
+# Restore orig perms
+mv /media/cryptofs/apps/usr/palm/applications/com.palm.app.isisbrowser/db/permissions/com.palm.browserbookmarks.old /etc/palm/db/permissions/com.palm.browserbookmarks
+mv /media/cryptofs/apps/usr/palm/applications/com.palm.app.isisbrowser/db/permissions/com.palm.browserhistory.old /etc/palm/db/permissions/com.palm.browserhistory
+mv /media/cryptofs/apps/usr/palm/applications/com.palm.app.isisbrowser/db/permissions/com.palm.browserpreferences.old /etc/palm/db/permissions/com.palm.browserpreferences
+
+luna-send -n 1 palm://com.palm.configurator/run '{"types":["dbpermissions"]}'
+
+exit 0

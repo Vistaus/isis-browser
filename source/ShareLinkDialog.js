@@ -133,8 +133,8 @@ enyo.kind({
                 this.$.spinner.show();
             } else {
                 this.$.button.setDisabled(!itemDefinition.exists);
-                if (!itemDefinition.exists) {
-                    this.$.downloadButton.show();
+                if (itemDefinition.exists) {
+                    this.$.downloadButton.hide();
                 }
                 this.$.spinner.hide();
             }
@@ -149,6 +149,8 @@ enyo.kind({
         if (!shareService.exists) {
             if (shareServiceType === "facebook") {
                 this.downloadFacebookApp();
+            } else if (shareServiceType === "sparrow") {
+                this.downloadSparrowApp();
             }
             return true;
         }
@@ -185,7 +187,6 @@ enyo.kind({
           var params = {
           type: "status",
           statusText: $L("Check out this web page: ") + this.url
-          }
           };
           this.$.launchApplicationService.call({id: "com.appstuh.sparrow", params: params});
         },
@@ -200,6 +201,12 @@ enyo.kind({
         this.log("Launching app catalog to download facebook");
         this.$.appCatalogService.call({id: "com.palm.app.enyo-findapps", params: {
             target: "http://developer.palm.com/appredirect/?packageid=com.palm.app.enyo-facebook"
+        }});
+    },
+    downloadSparrowApp: function () {
+        this.log("Launching app catalog to download Sparrow");
+        this.$.appCatalogService.call({id: "com.palm.app.enyo-findapps", params: {
+            target: "http://developer.palm.com/appredirect/?packageid=com.appstuh.sparrow"
         }});
     },
     listApplicationsSuccess: function (inSender, inResponse) {
@@ -222,6 +229,31 @@ enyo.kind({
         if (!foundFacebook) {
             this.SHARE_LINK_LIST.some(function (shareService, index) {
                 if (shareService.title === "Facebook") {
+                    shareService.exists = false;
+                    shareService.checkExistance = false;
+                    this.$.shareList.renderRow(index);
+                }
+            }, this);
+        }
+		
+        foundSparrow = apps.some(function (app) {
+            this.log(enyo.json.stringify(app));
+            if (app.id === "com.appstuh.sparrow") {
+
+                this.SHARE_LINK_LIST.some(function (shareService, index) {
+                    if (shareService.title === "Sparrow") {
+                        shareService.exists = true;
+                        shareService.checkExistance = false;
+                        this.$.shareList.renderRow(index);
+                    }
+                }, this);
+                return true;
+            }
+        }, this);
+
+        if (!foundSparrow) {
+            this.SHARE_LINK_LIST.some(function (shareService, index) {
+                if (shareService.title === "Sparrow") {
                     shareService.exists = false;
                     shareService.checkExistance = false;
                     this.$.shareList.renderRow(index);

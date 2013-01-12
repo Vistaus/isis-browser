@@ -1,6 +1,6 @@
 {
 	"id":"com.palm.browserbookmarks:1",
-	"owner":"com.palm.app.isisbrowser",
+	"owner":"com.palm.app.browser",
 	"indexes":[	{"name":"rev","props":[{"name":"_rev"}]},
 				{"name": "url", "props": [{"name": "url"}] },
 				{"name": "title", "props": [{"name": "title"}] },

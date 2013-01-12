@@ -25,6 +25,7 @@ enyo.kind({
 		onPageTitleChanged: "",
 		onPageLoadStopped: "",
 		onFileLoad: "",
+		onDownloadLink: "",
 		onAddBookmark: "",
 		onAddToLauncher: "",
 		onShareLink: "",
